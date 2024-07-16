@@ -57,7 +57,7 @@ const Login = () => {
                 alternate_email
               </span>
               <input
-                placeholder="email"
+                placeholder="email or  number"
                 name='email'
                 className="w-full py-4  outline-none mt-10 bg-transparent placeholder:text-white"
               />

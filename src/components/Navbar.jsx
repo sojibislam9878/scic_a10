@@ -25,7 +25,7 @@ const handleBalance = () => {
     <div className="sticky top-0 z-40 bg-[#E2126F] shadow-xl ">
       <div className="navbar bg-[#E2126F] container mx-auto p-4 ">
         <div className="navbar-start">
-          <div className="dropdown">
+          {/* <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -42,7 +42,7 @@ const handleBalance = () => {
                 />
               </svg>
             </div>
-            {/* <ul
+            <ul
               tabIndex={0}
               className=" menu menu-sm dropdown-content mt-3 z-[11] p-2 shadow bg-base-100 rounded-box w-52"
             >
@@ -75,11 +75,11 @@ const handleBalance = () => {
                   </a>
                 </div>
               )}
-            </ul> */}
-          </div>
+            </ul>
+          </div> */}
           <a
             to="/"
-            className="btn btn-ghost md:text-3xl text-xl font-play text-[#3181d1]"
+            className="btn btn-ghost md:text-3xl text-xl font-play text-[#ffffff]"
           >
             E-cash
           </a>
@@ -148,10 +148,10 @@ const handleBalance = () => {
                   className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
                 >
                   <li className="text-center text-lg font-bold mb-6 mt-3">
-                    {user?.displayName}
+                    {user.name}
                   </li>
                   <li>
-                    <a to="/dashboard" className="text-lg mb-4 font-semibold">Dashboard</a>
+                    <a to="/dashboard" className="text-lg mb-4 font-semibold">History</a>
                   </li>
                   <li>
                   <button

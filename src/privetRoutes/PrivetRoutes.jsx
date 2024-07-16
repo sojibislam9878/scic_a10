@@ -4,12 +4,13 @@ import useAuth from "../hooks/useAuth";
 
 // import Spinner from "../Components/Spinner";
 const PrivetRoute = ({ children }) => {
-  const { user} = useAuth();
+  const { user, loading} = useAuth();
   const location = useLocation();
 
-//   if (loading) {
-//     return <Spinner></Spinner>;
-//   }
+  if (loading) {
+    // return <Spinner></Spinner>;
+    return <div>loading</div>
+  }
   if (user) {
     return <div>{children}</div>;
   }

@@ -7,10 +7,11 @@ const AuthProviders = ({children}) => {
     const axiosCommon = useAxiosCommon(); // Custom hook to get Axios instance
   const [user, setUser] = useState(null);
   const [loginError, setLoginError] = useState(null);
+  const [loading , setLoading]=useState(true)
   // Function to handle user registration
   const handleReg = (userInfo) => {
     const userPayload = { ...userInfo, status: "pending" };
-
+        setLoading(true)
     // Check if user with the same email exists
     axiosCommon.get(`/user/${userInfo.email}`)
       .then(res => {
@@ -35,6 +36,7 @@ const AuthProviders = ({children}) => {
               // Handle error during registration
             });
         }
+        setLoading(false)
       })
       .catch(error => {
         console.error("Error checking user existence:", error);
@@ -50,15 +52,18 @@ const AuthProviders = ({children}) => {
 
   // Function to load user data from localStorage on component mount
   useEffect(() => {
+    setLoading(true)
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
       setUser(JSON.parse(storedUser));
     }
+    setLoading(false)
   }, []);
 
 
     // Function to handle user login
     const handleLogin = (loginInfo) => {
+        setLoading(true)
         console.log(loginInfo);
         if (!isNaN(loginInfo.email)) {
           return  axiosCommon.get(`/usern/${loginInfo.email}`)
@@ -67,7 +72,7 @@ const AuthProviders = ({children}) => {
               setUser(res.data);
               setLoginError(null);
               localStorage.setItem('user', JSON.stringify(res.data));
-              
+              setLoading(false)
             }
           })
         }
@@ -86,6 +91,7 @@ const AuthProviders = ({children}) => {
             console.error("Error logging in:", error);
             setLoginError("Error logging in. Please try again later.");
           });
+          setLoading(false)
       };
 
 console.log(user);
@@ -95,6 +101,8 @@ console.log(user);
         handleReg,
         handleLogout,
         handleLogin,
+        loginError,
+        loading,
 
     }
     return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>;

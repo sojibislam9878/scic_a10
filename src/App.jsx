@@ -4,6 +4,7 @@ import viteLogo from '/vite.svg'
 import Navbar from './components/Navbar'
 import useAuth from './hooks/useAuth'
 import { useNavigate } from 'react-router-dom'
+import Functions from './components/Functions'
 
 function App() {
   const navigate =useNavigate()
@@ -15,8 +16,9 @@ if (!user) {
   return (
     <div className='bg-[#ffadd2] min-h-screen'>
       <Navbar></Navbar>
-      <h1>Vite + React</h1>
-      
+      <div className='container mx-auto p-4 mt-20 '>
+        <Functions></Functions>
+      </div>
     </div>
   )
 }
