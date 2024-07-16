@@ -1,11 +1,47 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
 // import { useContext } from "react";
 // import { AuthContext } from "../providers/AuthProviders";
 
 const Registration = () => {
+const navigate = useNavigate()
   const isHide = true;
   // const all = useContext(AuthContext)
   // console.log(all);
+  const {user}=useAuth()
+  console.log(user);
+  const {handleReg}=useAuth()
+  const handleSubmit =(e)=>{
+    const from= e.target
+    e.preventDefault()
+    const name=from.name.value
+    const number=from.number.value
+    const email=from.email.value
+    const password=from.password.value
+    const role = from.role.value;
+    const userinfo = {name, number, email, password, role}
+    console.log(password.length);
+    console.log(userinfo);
+    if (!name || !number || !email || !password || !role
+    ) {
+        return alert("fill on section properly")
+    }
+    if (isNaN(password)) {
+        return alert("password have to be a number")
+    }
+    if (password.length < 5 || password.length > 5) {
+         return alert("password have to 5 degit")
+    }
+    if (number.length != 11 || isNaN(number)) {
+        return alert("phone nunber should have to 11 digit")
+    }
+    handleReg(userinfo)
+  }
+
+  if (user) {
+    navigate("/")
+  }
+
   return (
     <div
       style={{
@@ -18,7 +54,7 @@ const Registration = () => {
     >
       <div className=" rounded-lg p-6 md:w-2/3 xl:w-1/3 mx-auto shadow-xl backdrop-blur-md">
         <form
-        //   onSubmit={handleSubmit(onSubmit)}
+          onSubmit={handleSubmit}
         >
           <h1 className="text-4xl font-bold mt-12">Register New Account.</h1>
           <p className="font-medium mt-6 opacity-70">
@@ -30,6 +66,7 @@ const Registration = () => {
             </span>
             <input
               placeholder="Full Name"
+              name="name"
               className="w-full py-4  outline-none mt-10 bg-transparent placeholder:text-white "
             />
           </div>
@@ -39,6 +76,7 @@ const Registration = () => {
             </span>
             <input
               placeholder="Phone Number"
+              name="number"
               className="w-full py-4  outline-none mt-10 bg-transparent placeholder:text-white "
             />
           </div>
@@ -48,6 +86,7 @@ const Registration = () => {
             </span>
             <input
               type="email"
+              name="email"
               placeholder="Your Email"
               className="w-full py-4  outline-none mt-6 bg-transparent placeholder:text-white "
             />
@@ -60,6 +99,7 @@ const Registration = () => {
               <input
                 //   type={isHide ? "text" : "password"}
                 placeholder="Your Password"
+                name="password"
                 className="w-full py-4 outline-none mt-6 bg-transparent placeholder:text-white "
               />
             </div>
@@ -75,6 +115,14 @@ const Registration = () => {
                 <span className="material-symbols-outlined">visibility</span>
               )}
             </p>
+          </div>
+          <div className="flex justify-center items-center mt-6">
+            <label className="mr-4">
+              <input type="radio" name="role" value="user" defaultChecked /> User
+            </label>
+            <label>
+              <input type="radio" name="role" value="agent" /> Agent
+            </label>
           </div>
           <input
             type="submit"

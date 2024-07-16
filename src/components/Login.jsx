@@ -1,8 +1,38 @@
 
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import useAuth from '../hooks/useAuth';
 
 const Login = () => {
     const isHide=true
+    const {user, handleLogin}=useAuth()
+    const navigate =useNavigate()
+    if (user) {
+        navigate("/")
+    }
+
+    const handleLog =(e)=>{
+        const from= e.target
+        e.preventDefault()
+        const email=from.email.value
+        const password=from.password.value
+        const loginInfo = {email, password}
+        console.log(password.length);
+        console.log(loginInfo);
+        if ( !email || !password 
+        ) {
+            return alert("fill on section properly")
+        }
+        if (isNaN(password)) {
+            return alert("password have to be a number")
+        }
+        if (password.length < 5 || password.length > 5) {
+             return alert("password have to 5 degit")
+        }
+        handleLogin(loginInfo)
+      }
+
+
+
     return (
         <div
       style={{
@@ -16,7 +46,7 @@ const Login = () => {
       <div className="flex justify-center items-center p-4 pt-10 pb-12 flex-1">
         <div className=" rounded-lg p-6  md:w-2/3 xl:w-1/3 mx-auto shadow-2xl backdrop-blur-md ">
           <form 
-        //   onSubmit={handleSubmit(onSubmit)}
+          onSubmit={handleLog}
           >
             <h1 className="text-4xl font-bold mt-12">Log In</h1>
             <p className="font-medium mt-6 opacity-70">
@@ -28,6 +58,7 @@ const Login = () => {
               </span>
               <input
                 placeholder="email"
+                name='email'
                 className="w-full py-4  outline-none mt-10 bg-transparent placeholder:text-white"
               />
             </div>
@@ -38,6 +69,7 @@ const Login = () => {
                 </span>
                 <input
                   type={isHide ? "text" : "password"}
+                  name='password'
                   placeholder="password"
                   className="w-full py-4 outline-none mt-6 bg-transparent placeholder:text-white"
                 />

@@ -2,11 +2,14 @@
 // import useAuth from "../Hooks/useAuth";
 
 import { useState } from "react";
+import useAuth from "../hooks/useAuth";
 
 const Navbar = () => {
 //  const { user, logout } = useAuth();
+const {user}=useAuth()
 const [isChecking, setIsChecking] = useState(true);
-const user = true;
+// const user = true;
+const {handleLogout}=useAuth()
 
 const handleBalance = () => {
   setIsChecking(!isChecking);
@@ -152,7 +155,7 @@ const handleBalance = () => {
                   </li>
                   <li>
                   <button
-                // onClick={logout}
+                onClick={handleLogout}
                 className="btn mt-1 bg-[#003366] text-white font-bold hover:bg-[#072644]"
               >
                 Logout

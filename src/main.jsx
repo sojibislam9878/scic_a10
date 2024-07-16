@@ -9,11 +9,12 @@ import {
 import Registration from './components/Registration.jsx';
 import Login from './components/Login.jsx';
 import AuthProviders from './providers/AuthProviders.jsx';
+import PrivetRoute from './privetRoutes/PrivetRoutes.jsx';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App></App>,
+    element:<PrivetRoute><App></App></PrivetRoute> ,
   },
   {
     path: "/registration",
