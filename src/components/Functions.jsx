@@ -9,7 +9,7 @@ const Functions = () => {
         <figure>
           <img
             src={cashout}
-            alt="Shoes"
+            alt="photos"
           />
         </figure>
         <div className="card-body">
@@ -20,7 +20,7 @@ const Functions = () => {
         <figure>
           <img
             src={sendmoney}
-            alt="Shoes"
+            alt="photos"
           />
         </figure>
         <div className="card-body">
@@ -31,7 +31,7 @@ const Functions = () => {
         <figure>
           <img
             src={cashin}
-            alt="Shoes"
+            alt="photos"
           />
         </figure>
         <div className="card-body">
